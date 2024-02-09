@@ -121,8 +121,7 @@ if show_plots or save_plots:
     fn = plot_dir + 'ISRF_comparison_ld'
     auxil.save_figure(fn, ext=['pdf','png'], save_plots=save_plots)
 
-save_data = 1
-if save_data:
+if save_data := 1:
     out_dict = {}
     out_dict['comment'] = 'volume average of ISRF energy density over the cylinder around GC '
     out_dict['comment'] += 'visible at |GLon| < 10 deg and |GLat| < 2 deg from the Earth'
