@@ -30,6 +30,18 @@ mk2m = 1.e-6
 plot_dir = '../../paper/plots/'
 
 def get_isrf(model):
+    """Returns the energy values and corresponding dU/dld values of the average interstellar radiation field (ISRF) for a given model.
+    Parameters:
+        - model (str): Name of the model used to calculate the ISRF.
+    Returns:
+        - Es (ndarray): Array of energy values in eV.
+        - ld_dUdld (ndarray): Array of corresponding dU/dld values.
+    Processing Logic:
+        - Load the ISRF data from the specified file.
+        - Reverse the order of the energy values.
+        - Convert the wavelength values from meters to eV.
+        - Return the energy and dU/dld values."""
+    
     fn = '../../data/ISRF_average/ldUld_GC_average_%s.csv' % model
     data = np.loadtxt(fn, delimiter=',', skiprows=1).T
     lds = data[0]
@@ -38,6 +50,21 @@ def get_isrf(model):
     return Es, ld_dUdld
 
 def get_isrf_ld(model):
+    """Get ISRF (interstellar radiation field) data for a given model.
+    Parameters:
+        - model (str): Name of the model to retrieve data for.
+    Returns:
+        - lds (array): Array of wavelengths in microns.
+        - ld_dUdld (array): Array of ISRF values in units of erg/s/cm^3.
+    Processing Logic:
+        - Load data from file.
+        - Transpose data to get lds and ld_dUdld arrays.
+        - Return lds and ld_dUdld arrays.
+    Example:
+        lds, ld_dUdld = get_isrf_ld('Draine & Li 2007')
+        # lds = [0.1, 0.2, 0.3, ...]
+        # ld_dUdld = [1.2e-4, 2.3e-4, 3.4e-4, ...]"""
+    
     fn = '../../data/ISRF_average/ldUld_GC_average_%s.csv' % model
     data = np.loadtxt(fn, delimiter=',', skiprows=1).T
     lds = data[0]
